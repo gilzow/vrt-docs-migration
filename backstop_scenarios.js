@@ -35,6 +35,8 @@ const marker = args.marker;
 
 const vendor = args.vendor;
 
+const targetPaths = require("./testpaths.json")
+
 /**
  * Path where our template path file is located
  * default is project root path + ./.github/tests/vrt/
@@ -60,6 +62,8 @@ console.log("testURL is " + testURL);
 console.log("baseline is " + baselineURL);
 console.log("marker is " + marker);
 console.log("vendor is " + vendor);
+console.log("targetPaths is ...");
+console.log(targetPaths);
 
 /**
  * Our default paths that (almost) every template should test
@@ -82,7 +86,7 @@ let scenarioPaths;
 try {
   //console.log("Going to try and require " + pathFile);
   const templatePaths = require(pathFile);
-  scenarioPaths = [...defaultPaths.paths, ...templatePaths.paths];
+  scenarioPaths = [...defaultPaths.paths, ...templatePaths.paths, ...targetPaths];
 } catch (e) {
   //console.error(e)
   //console.log('pathfile didnt work so we\'re going to use ' + __dirname+path.sep+'default-paths.js');

@@ -41,6 +41,14 @@ function run_tests() {
 printf "PR environment URL for docs.platform.sh? "
 read -r URL
 
+printf "What is the base path we are updating? "
+read -r targetPath
+
+if [[ -z "${targetPath}" ]]; then
+  printf "I'm afraid I can't do that, Dave. I must have a target path. Exiting.\n "
+  exit
+fi
+
 # Standard "are you sure?" before we start
 printf "Have you updated the template-paths.js file in the tests directory? Y/n: "
 read -r continue
@@ -67,6 +75,25 @@ marker=$(date +%s)
 
 # all the vendors
 vendors=( "platform" "upsun" )
+
+if [[ ! $(command -v yq &> /dev/null) ]]; then
+  echo "You do not have yq installed. I need it for dealing with sitemap xml files. Please install it with: "
+  echo "brew install yq"
+  echo "I can continue but you'll need to add all paths to tests/template-paths.js. Continue? Y/n: "
+  read -r noYQ
+  if [[ "Y" != "${noYQ}" ]] && [[ "y" != "${noYQ}" ]]; then
+    echo "Exiting. "
+    exit
+  else
+    echo "Continuing... "
+    echo "[]" > testpaths.json
+  fi
+
+else
+  bash ./paths.sh "${targetPath}"
+fi
+
+
 
 # Counters are cool
 i=1

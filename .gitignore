@@ -5,3 +5,7 @@ backstop_data/html_report-*
 backstop_data/ci_report-*
 # NPM libraries
 node_modules
+upsun.sitemap.xml
+*.sitemap.json
+*.sitemap.xml
+testpaths.json
