@@ -75,8 +75,10 @@ marker=$(date +%s)
 
 # all the vendors
 vendors=( "platform" "upsun" )
+yqSuppress=$(command -v yq &> /dev/null);
+doTheYq=$?
 
-if [[ ! $(command -v yq &> /dev/null) ]]; then
+if (( 0 != doTheYq )); then
   echo "You do not have yq installed. I need it for dealing with sitemap xml files. Please install it with: "
   echo "brew install yq"
   echo "I can continue but you'll need to add all paths to tests/template-paths.js. Continue? Y/n: "
