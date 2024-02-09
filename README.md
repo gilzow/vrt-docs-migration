@@ -20,15 +20,15 @@ scenarioPaths.paths = [
     },
     {
       "label":"Security backups",
-      "path": "security/backups"
+      "path": "security/backups/"
     },
     {
       "label":"Security Data Retention",
-      "path": "security/data-retention"
+      "path": "security/data-retention/"
     },
     {
       "label":"Security Project Isolation",
-      "path": "security/project-isolation"
+      "path": "security/project-isolation/"
     },  
 ];
 ```
