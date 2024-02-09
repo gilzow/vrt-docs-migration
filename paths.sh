@@ -22,7 +22,7 @@ do
 
   if [[ ! -f "${vendor}.${targetPath}.sitemap.json" ]]; then
     #now let's save the xml to json
-    yq -o=json '.urlset.url' test.xml | jq 'map(.loc | capture("\/(?<path>'"${targetPath}"'\/.*$)") | .  )' > "${vendor}.${targetPath}.sitemap.json"
+    yq -o=json '.urlset.url' "${vendor}.sitemap.xml" | jq 'map(.loc | capture("\/(?<path>'"${targetPath}"'\/.*$)") | .  )' > "${vendor}.${targetPath}.sitemap.json"
   fi
 done
 
