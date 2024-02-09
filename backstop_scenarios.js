@@ -31,6 +31,10 @@ const baselineURL = args.refURL;
 
 //console.log('scenarios file has been called');
 
+const marker = args.marker;
+
+const vendor = args.vendor;
+
 /**
  * Path where our template path file is located
  * default is project root path + ./.github/tests/vrt/
@@ -50,10 +54,12 @@ const test_path = args.testPath ? args.testPath : path.resolve(process.env.GITHU
  * @type {string}
  */
 const pathFile = test_path+'template-paths.js';
-//console.log('pathFile is ' + pathFile);
+console.log('pathFile is ' + pathFile);
 
-//console.log("testURL is " + testURL);
-//console.log("baseline is " + baselineURL);
+console.log("testURL is " + testURL);
+console.log("baseline is " + baselineURL);
+console.log("marker is " + marker);
+console.log("vendor is " + vendor);
 
 /**
  * Our default paths that (almost) every template should test
@@ -71,6 +77,7 @@ let newScenarios = [];
  * @type {*[]}
  */
 let scenarioPaths;
+
 
 try {
   //console.log("Going to try and require " + pathFile);
@@ -104,6 +111,15 @@ newScenarios = scenarioPaths.reduce((accumulator, currentValue) => {
   return element;
 },{"ref":baselineURL,"test":testURL});
 
+let newPaths = {
+  bitmaps_reference: 'backstop_data/bitmaps_reference' + '-' + vendor + '-' + marker ,
+  bitmaps_test: 'backstop_data/bitmaps_test' + '-' + vendor + '-' + marker,
+  engine_scripts: 'backstop_data/engine_scripts',
+  html_report: 'backstop_data/html_report' + '-' + vendor + '-' + marker,
+  ci_report: 'backstop_data/ci_report' + '-' + vendor + '-' + marker,
+}
+
 module.exports = {
-  scenarios:newScenarios
+  scenarios:newScenarios,
+  paths:newPaths,
 }

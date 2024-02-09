@@ -11,7 +11,7 @@ const args = require('minimist')(process.argv.slice(2));
 /**
  *
  */
-const {scenarios} = require(`./backstop_scenarios`);
+const {scenarios,paths} = require(`./backstop_scenarios`);
 
 //console.log("testURL given to backstop is " + args.testURL);
 //console.log("refURL given to backstop is " + args.refURL);
@@ -30,31 +30,15 @@ module.exports = {
       height: 1024,
     },
     {
-      label: 'tablet-landscape',
-      width: 1024,
-      height: 768,
-    },
-    {
       label: 'desktop',
       width: 1280,
-      height: 1024,
-    },
-    {
-      label: 'desktop-wide',
-      width: 2000,
       height: 1024,
     },
   ],
   onBeforeScript: 'puppet/onBefore.js',
   onReadyScript: 'puppet/onReady.js',
   scenarios: scenarios,
-  paths: {
-    bitmaps_reference: 'backstop_data/bitmaps_reference',
-    bitmaps_test: 'backstop_data/bitmaps_test',
-    engine_scripts: 'backstop_data/engine_scripts',
-    html_report: 'backstop_data/html_report',
-    ci_report: 'backstop_data/ci_report',
-  },
+  paths: paths,
   report: ['CI'],
   engine: 'puppeteer',
   engineOptions: {
